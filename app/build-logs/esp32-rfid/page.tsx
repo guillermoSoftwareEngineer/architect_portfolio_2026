@@ -59,10 +59,10 @@ export default function ESP32BuildLog() {
         
         {/* HEADER */}
         <section id="build-log-header" className="mb-16 text-center md:text-left">
-          <a href="/#projects" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8 transition-colors text-sm font-medium">
+          <Link href="/#projects" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8 transition-colors text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Volver al Portafolio
-          </a>
+          </Link>
 
           <div className="flex flex-wrap gap-3 mb-6 md:justify-start justify-center">
             <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] uppercase tracking-widest font-mono text-gray-300">Build Log v1.0</span>

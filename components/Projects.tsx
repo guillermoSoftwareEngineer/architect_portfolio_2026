@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ImageLightbox from "./ImageLightbox";
+import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -66,10 +67,10 @@ export default function Projects() {
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
               Google Sheets en Vivo
             </a>
-            <a href="/build-logs/esp32-rfid" className="px-5 py-2.5 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-400 rounded-md text-sm font-semibold transition-colors flex items-center gap-2">
+            <Link href="/build-logs/esp32-rfid" className="px-5 py-2.5 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/20 text-purple-400 rounded-md text-sm font-semibold transition-colors flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
               Build Logs & Arquitectura
-            </a>
+            </Link>
           </div>
 
           {/* Visuals section */}
@@ -83,7 +84,7 @@ export default function Projects() {
               </div>
               <div className="flex-grow flex items-center justify-center p-0 bg-black/80 relative group">
                 <video 
-                  src="/videos/esp32-rfid-iot-telemetry-demo.mp4" 
+                  src={(process.env.__NEXT_ROUTER_BASEPATH || "") + "/videos/esp32-rfid-iot-telemetry-demo.mp4"} 
                   controls 
                   className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
                 />

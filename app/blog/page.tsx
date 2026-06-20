@@ -1,4 +1,5 @@
 import { getAllPosts } from '@/lib/posts'
+import Link from 'next/link'
 
 export default async function BlogPage() {
   const posts = await getAllPosts()
@@ -28,7 +29,7 @@ export default async function BlogPage() {
         ) : (
           <div className="space-y-6">
             {posts.map((post) => (
-              <a key={post.slug} href={`/blog/${post.slug}`} className="block">
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="block">
                 <article className="glass-panel p-8 group hover:border-blue-500/30 transition-all">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <h2 className="text-xl font-semibold group-hover:text-blue-400 transition-colors leading-snug">
@@ -45,15 +46,15 @@ export default async function BlogPage() {
                     ))}
                   </div>
                 </article>
-              </a>
+              </Link>
             ))}
           </div>
         )}
 
         <div className="mt-12 pt-8 border-t border-white/10">
-          <a href="/" className="text-sm text-gray-500 hover:text-white transition-colors font-mono flex items-center gap-2">
+          <Link href="/" className="text-sm text-gray-500 hover:text-white transition-colors font-mono flex items-center gap-2">
             ← volver al portafolio
-          </a>
+          </Link>
         </div>
       </div>
     </main>

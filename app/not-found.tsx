@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <main className="min-h-screen bg-[#080808] text-gray-100 flex flex-col items-center justify-center p-6 text-center">
@@ -13,12 +15,12 @@ export default function NotFound() {
         <p className="text-gray-400 mb-8 leading-relaxed">
           La ruta que intentas auditar no existe en el sistema o ha sido reubicada para optimizar recursos.
         </p>
-        <a 
+        <Link 
           href="/" 
           className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]"
         >
           Regresar al Portafolio
-        </a>
+        </Link>
       </div>
     </main>
   );

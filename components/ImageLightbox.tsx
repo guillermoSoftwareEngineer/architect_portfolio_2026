@@ -77,7 +77,7 @@ function LightboxOverlay({ src, alt, onClose }: { src: string; alt: string; onCl
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={src}
+          src={src.startsWith("http") ? src : (process.env.__NEXT_ROUTER_BASEPATH || "") + src}
           alt={alt}
           style={{
             maxWidth: "95vw",

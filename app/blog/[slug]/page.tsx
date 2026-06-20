@@ -1,6 +1,7 @@
 import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -59,9 +60,9 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <footer className="mt-16 pt-8 border-t border-white/10">
-          <a href="/blog" className="text-sm text-gray-500 hover:text-white transition-colors font-mono flex items-center gap-2">
+          <Link href="/blog" className="text-sm text-gray-500 hover:text-white transition-colors font-mono flex items-center gap-2">
             ← volver a los Build Logs
-          </a>
+          </Link>
         </footer>
 
       </article>
