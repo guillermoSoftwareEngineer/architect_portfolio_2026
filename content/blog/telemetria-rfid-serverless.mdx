@@ -1,0 +1,196 @@
+---
+title: "Build Log v1.0 — Arquitectura Serverless"
+date: "2026-05-05"
+summary: "De la Protoboard a la Nube: Cómo Arquitecté un Sistema de Telemetría a Costo Cero"
+tags: ["IoT", "ESP32", "Google Apps Script", "Serverless", "RFID", "Arquitectura"]
+---
+
+# Build Log v1.0 — Arquitectura Serverless
+
+## De la Protoboard a la Nube: Cómo Arquitecté un Sistema de Telemetría a Costo Cero
+
+> *"No construí un reloj de asistencia. Construí el sistema que permite operar y monitorear 100 relojes eficientemente sin pagar un centavo en servidores."*
+
+---
+
+## Prólogo: El rechazo que lo inició todo
+
+Este proyecto no nació de un tutorial. Nació de un ATS.
+
+Apliqué a una empresa que buscaba un perfil técnico en soporte y operaciones IoT. El sistema automatizado de selección rechazó mi CV antes de que un humano lo viera. No porque no tuviera las capacidades, sino porque no tenía evidencia tangible de ellas.
+
+Esa noche tomé una decisión: dejar de pedir permiso para demostrar lo que sé y simplemente construirlo.
+
+La pregunta que me hice fue directa: ¿qué necesitaría ver ese equipo técnico para que ningún ATS pudiera ignorarme?
+
+La respuesta fue este sistema.
+
+---
+
+## El Problema Real
+
+Las empresas que despliegan hardware distribuido, como terminales de control de acceso, enfrentan un problema silencioso pero costoso: el soporte operativo reactivo.
+
+Cuando un cliente llama para decir "la máquina no lee la tarjeta", el equipo técnico normalmente tiene que agendar una visita física. Tiempo perdido. Costo real. Escala imposible.
+
+Además, alojar servidores dedicados para recibir miles de pings diarios genera costos fijos de VPS y bases de datos que muchas empresas medianas no justifican en etapas tempranas.
+
+El desafío era concreto: ¿cómo lograr telemetría en tiempo real, diagnósticos remotos y registro de accesos, con latencia baja, usando herramientas 100% gratuitas y serverless?
+
+La respuesta no estaba en buscar la tecnología más costosa. Estaba en entender que el Google Workspace que ya usan esas empresas puede ser reconfigurado como infraestructura IoT.
+
+---
+
+## La Solución: Arquitectura Híbrida y Serverless
+
+![Arquitectura del Sistema](/images/system-architecture-es.png)
+
+```text
+[ESP32 en Wokwi]  →  HTTP POST  →  [Google Apps Script]  →  [Google Sheets]
+      |                                                            |
+  RFID RC522                                         [Dashboard — GitHub Pages]
+  LCD 16x2 I2C                                       Heartbeat cada 30s — Live
+  LEDs + Buzzer
+  WiFi
+```
+
+El ecosistema de Google Workspace actúa como un backend improvisado pero extremadamente potente. Google Apps Script funciona como nuestra API REST, recibiendo eventos vía `doPost` y respondiendo consultas vía `doGet`, escalando automáticamente de cero a miles de peticiones sin gestionar infraestructura. Google Sheets sirve como base de datos tabular, accesible, auditable y exportable. Un dashboard estático en GitHub Pages consume esa data mediante fetch al endpoint público, logrando un panel de monitoreo en vivo con heartbeats cada 30 segundos.
+
+El firmware del ESP32 está escrito en C++ con una mentalidad de tiempo real: en ningún momento se usa `delay()` para gestionar tiempos. Ese detalle, que parece menor, es en realidad la columna vertebral del sistema.
+
+---
+
+## Decisiones Técnicas que Importan
+
+### Por qué millis() y no delay()
+
+Esta es probablemente la decisión más importante del firmware y la que más candidatos omiten explicar.
+
+`delay(30000)` detiene todo el programa durante 30 segundos. La tarjeta RFID no se lee. El LCD no responde. El botón de diagnóstico no funciona. El dispositivo está, en la práctica, muerto durante ese tiempo.
+
+La alternativa es un patrón basado en tiempo transcurrido:
+
+```cpp
+if (millis() - ultimoHeartbeat >= INTERVALO_HEARTBEAT) {
+    enviarHeartbeat();
+    ultimoHeartbeat = millis();
+}
+```
+
+Este patrón permite que el loop principal corra continuamente. El heartbeat se dispara cuando corresponde, pero entre disparo y disparo el sistema sigue leyendo tarjetas, actualizando el LCD y respondiendo al botón de diagnóstico. Es el mismo principio detrás de los sistemas de tiempo real embebido.
+
+### Guard Clauses bajo condiciones de red inestable
+
+Una Guard Clause es una técnica para salir temprano de una función si no se cumplen las condiciones básicas para ejecutarla. En el contexto IoT, esto es crítico:
+
+```cpp
+void enviarDatos(String payload) {
+    if (WiFi.status() != WL_CONNECTED) return;
+    // Solo llega aquí si hay conexión
+    // ... lógica de envío HTTP
+}
+```
+
+Sin esta guarda, el código intenta enviar datos, falla, espera el timeout del HTTPClient, y durante ese tiempo el sistema está bloqueado. Con la guarda, la función sale en microsegundos y el hardware sigue operando en modo offline.
+
+El sistema tiene tres niveles de robustez que trabajan juntos: `manejarSinWiFi()` intenta reconectar con lógica controlada, la guard clause evita errores en cadena si la reconexión no ocurre, y el heartbeat periódico garantiza que cualquier falla sea detectada desde el dashboard en menos de 60 segundos. Eso ya es arquitectura de dispositivo real.
+
+### Aleatoriedad de ID desde el hardware
+
+En programación, ninguna función genera aleatoriedad verdadera, solo pseudoaleatoriedad basada en semillas predecibles. En un sistema donde cada evento debe tener un ID único para no mezclarse en el registro, esto es un problema real.
+
+La solución viene de la electrónica: si dejas un pin analógico del ESP32 desconectado, ese pin estará recibiendo interferencia electromagnética del entorno, señal eléctrica genuinamente aleatoria. Leer ese pin con `analogRead()` y usarlo como semilla del generador aleatorio garantiza IDs únicos entre reinicios:
+
+```cpp
+randomSeed(analogRead(0)); // Pin flotante = entropía real del entorno
+String generarEventID() {
+    return String(random(100000, 999999)) + "-" + String(millis());
+}
+```
+
+Este detalle es el tipo de pensamiento de sistemas que diferencia a un ingeniero con formación técnica dual de alguien que solo conoce el software.
+
+### La limitación honesta de la V1: tarjetas autorizadas
+
+La versión 1 almacena las tarjetas autorizadas en un arreglo estático en el firmware:
+
+```cpp
+String tarjetasAutorizadas[] = {
+    "A1B2C3D4",
+    "E5F6G7H8",
+    "12345678"
+};
+```
+
+Esto funciona para el MVP, pero tiene una implicación importante: agregar o quitar una tarjeta requiere recompilar y re-flashear el firmware. En una flota de 100 dispositivos, eso es operativamente inviable.
+
+La arquitectura correcta para resolver esto evoluciona de forma natural. En esta versión la lista vive estática en el código. La siguiente versión la migra a EEPROM local, eliminando la necesidad de recompilar aunque sin sincronización remota todavía. Más adelante, el backend remoto permite gestión central pero con dependencia de conectividad. El salto final es MQTT con tópicos de revocación, donde el servidor puede actualizar tarjetas en toda la flota simultáneamente en milisegundos.
+
+Documentar esta limitación y el camino de evolución es más valioso en un portafolio que pretender que todo está resuelto.
+
+---
+
+## Desafíos de Integración
+
+### Bloqueo por pérdida de conexión WiFi
+
+Si el dispositivo perdía internet, el código original se quedaba atascado intentando enviar el payload POST, congelando la lectura de tarjetas durante el tiempo de timeout del cliente HTTP, hasta 15 segundos por intento.
+
+La solución fue implementar una arquitectura híbrida con caché local. Las tarjetas autorizadas se mantienen en memoria (y en EEPROM, próximamente). Las Guard Clauses detectan la ausencia de WiFi antes de intentar cualquier operación de red. El hardware sigue validando accesos contra su caché local en modo offline. Cuando la conexión se restaura, los eventos pendientes se envían en orden.
+
+La clave conceptual aquí es que un dispositivo IoT no puede depender de la nube para su función principal. La nube es para telemetría y registro, no para la operación core.
+
+### CORS y redirecciones 302 de Google
+
+Google Apps Script, por seguridad, responde a los POST con una redirección temporal HTTP 302 hacia una URL diferente. El HTTPClient del ESP32, por defecto, no sigue redirecciones y simplemente reporta el 302 como un error, descartando el payload.
+
+La solución fue una sola línea de configuración que la mayoría de tutoriales omite:
+
+```cpp
+http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
+```
+
+Esta directiva fuerza al cliente HTTP del ESP32 a seguir la redirección de Google sin perder el JSON en el camino. Sin esto, el sistema funciona en el simulador pero falla silenciosamente con el backend real.
+
+El aprendizaje: los problemas de integración entre capas rara vez aparecen en tutoriales. Aparecen cuando usas herramientas reales juntas.
+
+---
+
+## Las Métricas que Hablan el Idioma del Negocio
+
+Un sistema técnico que no puede justificarse en términos de impacto operativo es difícil de defender ante cualquier stakeholder.
+
+| Métrica | Sin sistema | Con sistema |
+|---|---|---|
+| Tiempo de configuración de equipo | 12 minutos (manual) | 4 minutos (guiado) |
+| Detección de falla de conectividad | Depende de que el cliente llame | Menos de 60 segundos (automático) |
+| Diagnóstico remoto | Visita física necesaria | Logs en tiempo real vía dashboard |
+| Costo de infraestructura mensual | VPS + DB = $15-40/mes | $0 (100% serverless) |
+
+Estas cifras no son ficticias, emergen de la arquitectura real del sistema.
+
+---
+
+## Lo que viene en las siguientes versiones
+
+Este MVP demuestra la viabilidad técnica de una flota distribuida. En las próximas versiones el sistema incorporará manejo robusto de JSON con ArduinoJson, reconexión WiFi con backoff exponencial, máquina de estados explícita, watchdog timer, gestión dinámica de tarjetas sin recompilar firmware, comunicación MQTT para actualizaciones en tiempo real y OTA updates para administración remota de la flota. Cada mejora tiene un propósito concreto: llevar el sistema de demo funcional a dispositivo IoT de producción.
+
+---
+
+## Reflexión final
+
+Este proyecto existe porque un sistema automatizado decidió que no calificaba antes de que un humano revisara mi perfil.
+
+Lo que construí no es la respuesta a ese rechazo. Es la evidencia de que el rechazo estaba equivocado.
+
+No documenté este proyecto para mostrar tecnología. Lo documenté para demostrar una forma de pensar: que los problemas operativos reales tienen soluciones de arquitectura elegantes, que las limitaciones de la V1 son tan importantes como sus capacidades, y que la diferencia entre un hobby project y un sistema de producción está en las decisiones que se toman cuando algo falla.
+
+El ATS que me rechazó buscaba keywords. Este sistema habla de principios.
+
+---
+
+**Escrito por: Guillermo Vásquez**
+
+[Ver Repositorio](https://github.com/guillermoSoftwareEngineer/esp32-rfid-iot-telemetry) | [Ver Live Demo](https://guillermosoftwareengineer.github.io/esp32-rfid-iot-telemetry/) | [Volver al Portafolio](http://localhost:3000/#projects)
+
+*Build Log V2.0 — Sistema Robusto: próximamente.*

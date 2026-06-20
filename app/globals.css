@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #2563eb;
+  --color-brand-light: #93c5fd;
+  --color-bg-dark: #080808;
+  --color-panel-bg: rgba(18, 18, 20, 0.7);
+  --color-panel-border: rgba(255, 255, 255, 0.08);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-dark);
+    color: #f5f5f5;
+  }
+}
+
+@layer components {
+  /* Glass Panel System */
+  .glass-panel {
+    background: var(--color-panel-bg);
+    border: 1px solid var(--color-panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #93c5fd, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Hero — fondo de cuadrícula sutil (estilo Agente 10 / pensamiento estructurado) */
+  .hero-section {
+    background-color: #080808;
+    background-image:
+      linear-gradient(rgba(99, 102, 241, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.045) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}

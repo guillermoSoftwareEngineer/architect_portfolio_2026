@@ -1,0 +1,3 @@
+public/images/icon-complexity.jpg
+public/images/icon-architecture.jpg
+public/images/icon-optimization.jpg

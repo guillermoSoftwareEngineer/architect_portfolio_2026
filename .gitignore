@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+build/
+.env
+.env*.local
+OllamaSetup.exe
+*.exe
+AGENTS.md
+CLAUDE.md
+*.db
+*.db-journal
+.DS_Store
+Thumbs.db
