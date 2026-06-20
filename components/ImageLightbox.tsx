@@ -151,7 +151,7 @@ export default function ImageLightbox({ src, alt, width, height, className }: Im
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") open(); }}
       >
         <Image
-          src={src}
+          src={src.startsWith("http") ? src : (process.env.__NEXT_ROUTER_BASEPATH || "") + src}
           alt={alt}
           width={width}
           height={height}

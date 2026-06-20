@@ -13,7 +13,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
           <div className="relative w-10 h-10 shrink-0 flex items-center justify-center">
             <Image 
-              src="/images/logo.png" 
+              src={(process.env.__NEXT_ROUTER_BASEPATH || "") + "/images/logo.png"} 
               alt="Logo" 
               width={40}
               height={40}
