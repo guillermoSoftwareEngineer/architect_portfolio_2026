@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   // Habilita MDX en archivos .md y .mdx
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   output: 'export',
+  basePath: '/architect_portfolio_2026',
   images: {
     unoptimized: true,
   },
