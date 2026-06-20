@@ -60,14 +60,6 @@ export const metadata: Metadata = {
     creator: "@IngSistemasAplicados",
     images: ["/og-image.png"],
   },
-  icons: {
-    icon: [
-      { url: "/images/favicon.png", type: "image/png" },
-    ],
-    apple: [
-      { url: "/images/favicon.png", type: "image/png" },
-    ],
-  },
   robots: {
     index: true,
     follow: true,
