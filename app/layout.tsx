@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira-code" });
 
 const jsonLdPerson = {
   "@context": "https://schema.org",
@@ -11,7 +7,7 @@ const jsonLdPerson = {
   "name": "Guillermo Vásquez",
   "jobTitle": "Ingeniero de Sistemas Aplicados",
   "description": "Transformo complejidad técnica en arquitecturas optimizadas para decisiones y procesos reales.",
-  "url": "https://guillermovasquez.dev", // A la espera de dominio final oficial
+  "url": "https://guillermovasquez.dev",
   "sameAs": [
     "https://www.linkedin.com/in/guillermovasbendev",
     "https://github.com/guillermoSoftwareEngineer"
@@ -37,6 +33,11 @@ export const metadata: Metadata = {
     default: "Guillermo Vásquez | Ingeniero de Sistemas Aplicados",
   },
   description: "Transformo complejidad técnica en arquitecturas optimizadas para decisiones y procesos reales.",
+  icons: {
+    icon: "/architect_portfolio_2026/images/favicon.png",
+    shortcut: "/architect_portfolio_2026/images/favicon.png",
+    apple: "/architect_portfolio_2026/images/favicon.png",
+  },
   openGraph: {
     title: "Guillermo Vásquez | Ingeniero de Sistemas Aplicados",
     description: "Transformo complejidad técnica en arquitecturas optimizadas para decisiones y procesos reales.",
@@ -76,8 +77,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
-      <body className={`${inter.variable} ${firaCode.variable} font-sans antialiased`}>
+    <html lang="es">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+      </head>
+      <body>
         {children}
       </body>
     </html>
