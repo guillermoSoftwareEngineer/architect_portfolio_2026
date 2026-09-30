@@ -415,26 +415,66 @@ h1 .role {
   text-align: left;
 }
 
-/* ---------- Secciones de narrativa (viaje) ---------- */
-.journey {
-  min-height: 100vh;
+/* ---------- Escenario de narrativa Sticky (Opción B) ---------- */
+.journey-track {
+  position: relative;
+  height: 300svh;
+  width: 100%;
+}
+
+.journey-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 5rem 5%;
+  padding: 0 6%;
+  max-width: 1320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.journey-content-col {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+}
+
+.journey-3d-col {
+  display: none;
 }
 
 .j-card {
-  max-width: 440px;
+  max-width: 480px;
   background: var(--card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.45);
 }
 
-.j-card.right {
+.j-stage-card {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  width: 100%;
+  max-width: 480px;
+  will-change: transform, opacity;
+}
+
+.j-stage-card.left {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.j-stage-card.right {
   margin-left: auto;
+  margin-right: 0;
 }
 
 .j-num {
@@ -999,6 +1039,37 @@ footer p {
   .menu-btn { display: flex; z-index: 101; }
   .hero { padding-top: 5.5rem; }
   .approach-grid { grid-template-columns: 1fr; }
+  
+  /* Desactivar sticky y apilar tarjetas normalmente en móviles */
+  .journey-track {
+    height: auto !important;
+    position: static !important;
+    padding: 3rem 5%;
+  }
+  .journey-stage {
+    position: static !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    padding: 0 !important;
+  }
+  .journey-content-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  .j-stage-card {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    max-width: 100% !important;
+  }
+  .journey-3d-col {
+    display: none !important;
+  }
+
   .j-card { max-width: 100%; }
   .j-card.right { margin-left: 0; }
   .board-hud { display: none; }
@@ -1010,4 +1081,29 @@ footer p {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
+
+  .journey-track {
+    height: auto !important;
+    position: static !important;
+  }
+  .journey-stage {
+    position: static !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    padding: 4rem 5% !important;
+  }
+  .journey-content-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+  .j-stage-card {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
 }
+
