@@ -149,64 +149,67 @@ export default function Home() {
             <div className="journey-content-col">
               {/* FASE 1 — ARDUINO a la izquierda / Tarjeta a la derecha */}
               <article className="j-card j-stage-card right">
-                <div className="j-num">FASE 01 — ORIGEN</div>
+                <div className="j-num">FASE 01 — ORIGEN: VALIDACIÓN Y SISTEMAS CRÍTICOS</div>
                 <h2>
-                  <span className="tt-w">Técnico</span> <span className="tt-b">Electrónico</span>
+                  <span className="tt-w">Validación y</span> <span className="tt-b">Sistemas Críticos</span>
                 </h2>
                 <p>
-                  A lo largo de mi carrera noté una constante: demasiados profesionales se centran en hacer que el código &quot;compile&quot;, pero ignoran los cuellos de botella operativos que ese código genera a largo plazo.
+                  Mi carrera comenzó en el laboratorio, donde pasé de pasante a roles de alta responsabilidad, saltando etapas gracias a mi capacidad para diagnosticar y resolver problemas complejos en la intersección del hardware y el software.
                 </p>
                 <p>
-                  Yo no aprendí a ensamblar software siguiendo tutoriales; me forjé desmontando sistemas, entendiendo la latencia de las señales IoT y analizando la caída de un servidor bajo estrés.{" "}
+                  Allí aprendí una verdad fundamental: el software no flota en la nube; depende de la energía, la latencia de la red y la robustez del dispositivo.{" "}
                   <strong>
-                    Soy un Ingeniero de Sistemas Aplicados que concibe el ecosistema completo antes de escribir la primera línea del backend.
+                    Aprendí a validar sistemas desde el circuito hasta la señal, entendiendo que un código &quot;perfecto&quot; falla si ignora el entorno operativo.
                   </strong>
                 </p>
                 <ul>
                   <li>Arduino</li>
                   <li>ESP32</li>
                   <li>Raspberry Pi</li>
-                  <li>Electrónica de Potencia</li>
+                  <li>Instrumentación</li>
+                  <li>Pruebas de Sistemas</li>
                 </ul>
               </article>
 
               {/* FASE 2 — MÓDULO OLED a la derecha / Tarjeta a la izquierda */}
               <article className="j-card j-stage-card left">
-                <div className="j-num">FASE 02 — TRANSFORMACIÓN</div>
+                <div className="j-num">FASE 02 — TRANSFORMACIÓN: ARQUITECTURA ITERATIVA</div>
                 <h2>
-                  <span className="tt-w">Arquitecto</span> <span className="tt-b">Metodológico</span>
+                  <span className="tt-w">Arquitectura</span> <span className="tt-b">Iterativa y Pragmática</span>
                 </h2>
                 <p>
-                  El mercado no necesita otro &quot;apasionado desarrollador&quot; configurando el framework de moda. Exige arquitectos metodológicos.
+                  Me gradué como Ingeniero de Software para cerrar la brecha entre el dispositivo y la nube. Descubrí que la mejor arquitectura no se dibuja perfectamente antes de empezar, sino que evoluciona de forma iterativa junto con el código y las pruebas reales.
                 </p>
                 <p>
-                  <strong>Mi diferenciador es traducir complejidad al lenguaje del negocio</strong> e hiper-optimizar flujos asíncronos. Mientras otros cobran mantenimiento infinito por servidores subutilizados, yo estructuro ecosistemas serverless que facturan solo la milésima de segundo en que ejecutan una transacción.
+                  <strong>Mi enfoque no es buscar la herramienta de moda,</strong> sino orquestar soluciones pragmáticas (como ecosistemas serverless de bajo costo) que resuelvan el problema hoy, con un plan claro y documentado para escalar mañana.
                 </p>
                 <ul>
                   <li>TypeScript</li>
                   <li>Next.js</li>
                   <li>Node.js</li>
                   <li>Prisma</li>
+                  <li>Arq. Distribuidas</li>
                 </ul>
               </article>
 
               {/* FASE 3 — ESP32 a la izquierda / Tarjeta a la derecha */}
               <article className="j-card j-stage-card right">
-                <div className="j-num">FASE 03 — MISIÓN</div>
+                <div className="j-num">FASE 03 — MISIÓN: DECISIÓN BASADA EN DATOS</div>
                 <h2>
-                  <span className="tt-w">Sistemas</span> <span className="tt-b">Aplicados</span>
+                  <span className="tt-w">Hacia la Decisión</span> <span className="tt-b">Basada en Datos</span>
                 </h2>
                 <p>
-                  Me obsesiona eliminar la fricción: despiece absoluto de la lógica de negocio, bases de datos con esquemas Prisma, enrutamiento de Next.js e inyección de IoT directo al Edge.
+                  Me obsesiona la eliminación de la fricción. Cuando abordo un proyecto, realizo un despiece de la lógica de negocio para implementar soluciones sólidas: bases de datos relacionales con Prisma, enrutamiento eficiente en Next.js e inyección de IoT directo al Edge.
                 </p>
                 <p>
                   <strong>
-                    Trato tu infraestructura como el flujo aerodinámico de un vehículo: si no agiliza el movimiento final, se rediseña o se elimina.
-                  </strong>
+                    Actualmente, mi foco está en evolucionar estos sistemas para que no solo recolecten datos, sino que permitan tomar decisiones basadas en ellos,
+                  </strong>{" "}
+                  integrando principios de Ciencia de Datos en la capa de aplicación.
                 </p>
                 <ul>
-                  <li>IoT</li>
-                  <li>Edge Computing</li>
+                  <li>IoT &amp; Edge</li>
+                  <li>Ciencia de Datos</li>
                   <li>Serverless</li>
                   <li>Arq. Distribuida</li>
                 </ul>

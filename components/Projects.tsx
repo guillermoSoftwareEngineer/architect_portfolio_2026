@@ -73,10 +73,11 @@ export default function Projects() {
                 <h3>Sistema de Telemetría RFID e Ingesta Serverless</h3>
               </div>
               <div className="tags">
-                <span>ESP32</span>
-                <span>C++ (Edge)</span>
+                <span>ESP32 (C++)</span>
                 <span>Google Apps Script</span>
-                <span>Arq. Distribuida</span>
+                <span>Google Sheets</span>
+                <span>Python (ReportLab)</span>
+                <span>Wokwi</span>
               </div>
             </div>
             
@@ -128,19 +129,24 @@ export default function Projects() {
                 </div>
               </div>
               
-              <h4>1 · Contexto</h4>
+              <h4>1 · El Desafío</h4>
               <p>
-                Necesidad de capturar accesos físicos e indicadores de conectividad desde hardware distribuido sin depender de instancias VPS dedicadas costosas, manejando latencias de red impredecibles.
+                Crear un sistema de control de acceso y diagnóstico remoto distribuido. El ESP32 actúa simulando el comportamiento de una máquina industrial o su tarjeta de red, manejando latencias impredecibles y caídas de conexión, sin incurrir en costos fijos de infraestructura VPS.
               </p>
               
-              <h4>2 · Enfoque</h4>
+              <h4>2 · El Enfoque</h4>
               <p>
-                Diseñé un flujo orientado a micro-eventos. Los nodos actúan asincrónicamente mediante <code>millis()</code>. La inyección de datos usa la capa serverless de Google como middleware con Guard Clauses estrictas antes de persistir dinámicamente.
+                Diseñé una arquitectura orientada a micro-eventos. Los nodos ESP32 actúan asincrónicamente en el Edge (optimizando consumo y validando localmente), mientras una capa serverless actúa como middleware, aplicando validaciones estrictas y guard clauses de seguridad antes de persistir la información.
               </p>
               
-              <h4>3 · Resultado</h4>
+              <h4>3 · El Resultado Real</h4>
               <p>
-                Un MVP funcional y elástico capaz de orquestar Control de Acceso, Heartbeats y Diagnóstico Remoto a costo cero operativo. Se mapeó un Roadmap técnico claro para escalar a MQTT y PostgreSQL en producción.
+                Un MVP funcional y elástico capaz de orquestar Control de Acceso, Heartbeats y Diagnóstico Remoto a costo operativo cero.
+              </p>
+
+              <h4>4 · Roadmap de Escalado (v2.0 en desarrollo)</h4>
+              <p>
+                He identificado cuellos de botella en la latencia de las herramientas gratuitas. El roadmap técnico para la próxima versión incluye la migración a <strong>MQTT</strong> para comunicación en tiempo real y <strong>PostgreSQL</strong> para un manejo robusto de datos, sentando las bases para integrar análisis y toma de decisiones automatizada.
               </p>
               
               <div className="p-links">

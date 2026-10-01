@@ -3,41 +3,41 @@ export default function Approach() {
     <section className="solid" id="approach">
       <div className="wrap">
         <span className="sec-tag">
-          <b>//</b> Mi enfoque
+          <b>//</b> Enfoque &amp; Diferenciadores
         </span>
         <h2 className="sec-title">
-          <span className="tt-w">No solo codifico.</span>{" "}
-          <span className="tt-b">Arquitecto sistemas.</span>
+          <span className="tt-w">Criterios de</span>{" "}
+          <span className="tt-b">Ingeniería Real</span>
         </h2>
         <p className="sec-lead">
-          Un enfoque metódico para resolver problemas empresariales a través de la tecnología.
+          Pragmatismo, entendimiento profundo del stack e iteración orientada a valor.
         </p>
         <div className="approach-grid">
 
-          {/* Análisis de Complejidad */}
+          {/* Bloque 1: Visión de Stack Completo */}
           <article className="a-card">
-            <i className="fas fa-magnifying-glass-chart a-icon" />
-            <h3>Análisis de Complejidad</h3>
+            <i className="fas fa-layer-group a-icon" />
+            <h3>Visión de Stack Completo</h3>
             <p>
-              Desgloso problemas caóticos en flujos lógicos comprensibles antes de escribir una sola línea de código.
+              No solo codifico el backend; entiendo lo que sucede en el Edge. Documento flujos completos que resisten el escrutinio técnico porque sé cómo se comporta la señal desde el sensor hasta la base de datos.
             </p>
           </article>
 
-          {/* Diseño de Arquitectura */}
+          {/* Bloque 2: Pragmatismo y Eficiencia Sistémica */}
           <article className="a-card">
-            <i className="fas fa-sitemap a-icon" />
-            <h3>Diseño de Arquitectura</h3>
+            <i className="fas fa-scale-balanced a-icon" />
+            <h3>Pragmatismo y Eficiencia Sistémica</h3>
             <p>
-              Estructuración de soluciones resilientes y escalables adaptadas a los requisitos técnicos y de negocio.
+              Trato la infraestructura con criterios de ingeniería real: si un componente no aporta valor, consume recursos innecesarios o añade fricción, se refactoriza o se elimina. Prefiero un MVP serverless de costo cero que funcione hoy, sobre una sobreingeniería costosa que no se usa.
             </p>
           </article>
 
-          {/* Optimización Continua */}
+          {/* Bloque 3: Evolución hacia los Datos */}
           <article className="a-card">
-            <i className="fas fa-gauge-high a-icon" />
-            <h3>Optimización Continua</h3>
+            <i className="fas fa-chart-line a-icon" />
+            <h3>Evolución hacia los Datos</h3>
             <p>
-              Ajuste constante de rendimiento, cuellos de botella y procesos para entregar resultados eficientes.
+              Un sistema que solo almacena datos es un sistema a medias. Mi objetivo es dotar a mis arquitecturas de capacidades analíticas, transformando telemetría cruda en insights accionables para el negocio.
             </p>
           </article>
 
