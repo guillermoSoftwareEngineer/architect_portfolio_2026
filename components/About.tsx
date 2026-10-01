@@ -11,52 +11,52 @@ export default function About() {
         
         <article className="about-block">
           <h3>
-            <i className="fas fa-user-astronaut" />
-            Quién Soy: Mi Origen Profesional
+            <i className="fas fa-microchip" />
+            Quién Soy: Validación y Sistemas Críticos
           </h3>
           <p>
-            A lo largo de mi carrera, siempre noté una constante en los equipos de ingeniería y automatización: demasiados profesionales se centran exclusivamente en hacer que el código "compile", pero ignoran por completo los cuellos de botella operativos que ese mismo código genera a largo plazo.
+            Mi carrera comenzó en el laboratorio, donde pasé de pasante a roles de alta responsabilidad, saltando etapas gracias a mi capacidad para diagnosticar y resolver problemas complejos en la intersección del hardware y el software.
           </p>
           <p>
-            Yo no aprendí a ensamblar software siguiendo tutoriales; me forjé desmontando sistemas, entendiendo la latencia de las señales IoT, analizando la caída libre de un servidor web bajo estrés, y aprendiendo a ver todo entorno tecnológico como un ecosistema vivo de datos.
+            Allí aprendí una verdad fundamental: el software no flota en la nube; depende de la energía, la latencia de la red y la robustez del dispositivo.
           </p>
           <p>
             <strong>
-              Soy un Ingeniero de Sistemas Aplicados que concibe el ecosistema completo antes de siquiera escribir la primera línea del backend.
+              Aprendí a validar sistemas desde el circuito hasta la señal, entendiendo que un código &quot;perfecto&quot; falla si ignora el entorno operativo.
             </strong>
           </p>
         </article>
 
         <article className="about-block">
           <h3>
-            <i className="fas fa-lightbulb" />
-            Qué Hago Diferente: La Transformación
+            <i className="fas fa-sitemap" />
+            Qué Hago Diferente: Arquitectura Iterativa y Pragmática
           </h3>
           <p>
-            Descubrí rápidamente que el mercado no necesita otro "apasionado desarrollador" que pueda configurar un framework de moda. El mercado exige arquitectos metodológicos.
+            Me gradué como Ingeniero de Software para cerrar la brecha entre el dispositivo y la nube. Descubrí que la mejor arquitectura no se dibuja perfectamente antes de empezar, sino que evoluciona de forma iterativa junto con el código y las pruebas reales.
           </p>
           <p>
             <strong>
-              Mi diferenciador radical es la traducción de complejidad al lenguaje del negocio y la hiper-optimización de flujos asíncronos.
+              Mi enfoque no es buscar la herramienta de moda, sino orquestar soluciones pragmáticas
             </strong>{" "}
-            Mientras otros te cobran un mantenimiento infinito por granjas de servidores que nunca utilizaste al 100%, yo estructuro ecosistemas Serverless y micro-servicios distribuidos que facturan solo la milésima de segundo en la que ejecutan una transacción, dejándote a ti disfrutar la automatización real, libre de costos hundidos.
+            (como ecosistemas serverless de bajo costo) que resuelvan el problema hoy, con un plan claro y documentado para escalar mañana sin deuda técnica invisible.
           </p>
         </article>
 
         <article className="about-block">
           <h3>
-            <i className="fas fa-cogs" />
-            Cómo Trabajo: El Proceso
+            <i className="fas fa-chart-pie" />
+            Cómo Trabajo: Hacia la Decisión Basada en Datos
           </h3>
           <p>
-            Me obsesiona la eliminación de la fricción. Cuando abordo tu proyecto tecnológico, realizo un despiece absoluto de la lógica de tu negocio.
+            Me obsesiona la eliminación de la fricción. Cuando abordo un proyecto tecnológico, realizo un despiece riguroso de la lógica de negocio.
           </p>
           <p>
-            Implemento bases de datos relacionales estables con esquemas Prisma, levanto el enrutamiento de Next.js, orquesto la inyección de IoT directo al Edge, y documento flujos completos que resisten el escrutinio técnico del equipo más pesado.
+            Implemento bases de datos relacionales con Prisma, levanto enrutamiento eficiente en Next.js, orquesto la inyección de IoT directo al Edge, y documento flujos completos que resisten el escrutinio técnico más exigente.
           </p>
           <p>
             <strong>
-              Trato tu infraestructura como si fuese el flujo de aire aerodinámico de un vehículo: si no agiliza el movimiento final, se rediseña o se elimina.
+              Actualmente, mi foco está en evolucionar estos sistemas para que no solo recolecten telemetría, sino que permitan tomar decisiones basadas en datos e integrando principios analíticos en la capa de aplicación.
             </strong>
           </p>
         </article>

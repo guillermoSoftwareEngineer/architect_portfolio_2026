@@ -23,10 +23,10 @@ export default function Hero() {
         </span>
         <h1>
           Guillermo Vásquez
-          <span className="role">Ingeniero de Sistemas Aplicados</span>
+          <span className="role">Ingeniero de Software con experiencia en sistemas electrónicos</span>
         </h1>
         <p className="hero-lead">
-          Transformo complejidad técnica en arquitecturas optimizadas para decisiones y procesos reales.
+          Construyo soluciones que entienden tanto el hardware que las ejecuta, como el software que las orquesta. Transformo limitaciones físicas y restricciones de presupuesto en arquitecturas iterativas, funcionales y escalables.
         </p>
         <div className="cta-row">
           <a
@@ -35,14 +35,14 @@ export default function Hero() {
             onClick={(e) => handleScrollTo(e, "projects")}
           >
             <i className="fas fa-folder-open" />
-            Ver Casos de Estudio
+            Ver Proyectos y Arquitectura
           </a>
           <a
             className="btn btn-ghost"
-            href={`${basePath}/#about`}
-            onClick={(e) => handleScrollTo(e, "about")}
+            href={`${basePath}/#contact`}
+            onClick={(e) => handleScrollTo(e, "contact")}
           >
-            Leer sobre mi enfoque
+            Hablemos de Ingeniería
           </a>
         </div>
       </div>
